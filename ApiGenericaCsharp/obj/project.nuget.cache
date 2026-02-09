@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "OvfUic672Lo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\yefer\\OneDrive\\Escritorio\\Proyecto CS\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yefer\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\yefer\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
