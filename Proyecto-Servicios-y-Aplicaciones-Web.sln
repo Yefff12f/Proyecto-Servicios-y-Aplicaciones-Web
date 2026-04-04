@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGenericaCsharp", "ApiGenericaCsharp\ApiGenericaCsharp.csproj", "{34FD8CBA-356D-B662-0059-F71ACDB39C20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34FD8CBA-356D-B662-0059-F71ACDB39C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34FD8CBA-356D-B662-0059-F71ACDB39C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34FD8CBA-356D-B662-0059-F71ACDB39C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34FD8CBA-356D-B662-0059-F71ACDB39C20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C593A084-9F20-4A74-81B8-A186763F975C}
+	EndGlobalSection
+EndGlobal
