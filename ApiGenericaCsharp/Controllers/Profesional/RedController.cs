@@ -1,50 +1,54 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
-using ApiProyecto.Models.conocimiento;
+using ApiProyecto.Models.Profesional;
 
-namespace ApiProyecto.Controllers.conocimiento
+namespace ApiProyecto.Controllers.Profesional
 {
-    [Route("api/ods")]
+    [Route("api/red")]
     [ApiController]
-    public class OdsController : ControllerBase
+    public class RedController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public OdsController(AppDbContext context) { _context = context; }
+        public RedController(AppDbContext context) { _context = context; }
 
         [HttpGet]
-        public async Task<ActionResult> Get() => Ok(new { datos = await _context.Ods.ToListAsync() });
+        public async Task<ActionResult> Get()
+        {
+            var lista = await _context.redes.ToListAsync();
+            return Ok(new { datos = lista });
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var item = await _context.Ods.FindAsync(id);
+            var item = await _context.redes.FindAsync(id);
             if (item == null) return NotFound();
             return Ok(item);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Ods item)
+        public async Task<ActionResult> Post(Red item)
         {
-            _context.Ods.Add(item);
+            _context.redes.Add(item);
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro creado correctamente" });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Ods item)
+        public async Task<IActionResult> Put(int id, Red item)
         {
-            if (id != item.id) return BadRequest();
+            if (id != item.idr) return BadRequest();
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro actualizado correctamente" });
         }
 
         [HttpPut("{campo}/{valor}")]
-        public async Task<IActionResult> PutPorCampo(string campo, string valor, Ods item)
+        public async Task<IActionResult> PutPorCampo(string campo, string valor, Red item)
         {
-            if (campo.ToLower() != "id" || !int.TryParse(valor, out int id)) return BadRequest();
-            item.id = id;
+            if (campo.ToLower() != "idr" || !int.TryParse(valor, out int id)) return BadRequest();
+            item.idr = id;
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro actualizado correctamente" });
@@ -53,9 +57,9 @@ namespace ApiProyecto.Controllers.conocimiento
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _context.Ods.FindAsync(id);
+            var item = await _context.redes.FindAsync(id);
             if (item == null) return NotFound();
-            _context.Ods.Remove(item);
+            _context.redes.Remove(item);
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro eliminado correctamente" });
         }
@@ -63,10 +67,10 @@ namespace ApiProyecto.Controllers.conocimiento
         [HttpDelete("{campo}/{valor}")]
         public async Task<IActionResult> DeletePorCampo(string campo, string valor)
         {
-            if (campo.ToLower() != "id" || !int.TryParse(valor, out int id)) return BadRequest();
-            var item = await _context.Ods.FindAsync(id);
+            if (campo.ToLower() != "idr" || !int.TryParse(valor, out int id)) return BadRequest();
+            var item = await _context.redes.FindAsync(id);
             if (item == null) return NotFound();
-            _context.Ods.Remove(item);
+            _context.redes.Remove(item);
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro eliminado correctamente" });
         }

@@ -1,0 +1,40 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ApiProyecto.Data;
+using ApiProyecto.Models.Profesional;
+
+namespace ApiProyecto.Controllers.Profesional
+{
+    [Route("api/intereses_futuros")]
+    [ApiController]
+    public class InteresesFuturosController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+        public InteresesFuturosController(AppDbContext context) { _context = context; }
+
+        [HttpGet]
+        public async Task<ActionResult> Get()
+        {
+            var lista = await _context.InteresesFuturos.ToListAsync();
+            return Ok(new { datos = lista });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(InteresesFuturos item)
+        {
+            _context.InteresesFuturos.Add(item);
+            await _context.SaveChangesAsync();
+            return Ok(new { mensaje = "Registro creado correctamente" });
+        }
+
+        [HttpDelete("{docente}/{termino}")]
+        public async Task<IActionResult> Delete(int docente, string termino)
+        {
+            var item = await _context.InteresesFuturos.FindAsync(docente, termino);
+            if (item == null) return NotFound();
+            _context.InteresesFuturos.Remove(item);
+            await _context.SaveChangesAsync();
+            return Ok(new { mensaje = "Registro eliminado correctamente" });
+        }
+    }
+}

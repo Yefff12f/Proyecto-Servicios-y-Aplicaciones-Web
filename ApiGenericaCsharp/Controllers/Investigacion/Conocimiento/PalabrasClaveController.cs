@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
-using ApiProyecto.Models.conocimiento;
+using ApiProyecto.Models.Proyecto;
 
-namespace ApiProyecto.Controllers.conocimiento
+namespace ApiProyecto.Controllers.Proyecto
 {
     [Route("api/palabras_clave")]
     [ApiController]
@@ -13,58 +13,24 @@ namespace ApiProyecto.Controllers.conocimiento
         public PalabrasClaveController(AppDbContext context) { _context = context; }
 
         [HttpGet]
-        public async Task<ActionResult> Get() => Ok(new { datos = await _context.PalabrasClave.ToListAsync() });
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> Get()
         {
-            var item = await _context.PalabrasClave.FindAsync(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            var lista = await _context.PalabrasClave.ToListAsync();
+            return Ok(new { datos = lista });
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(PalabraClave item)
+        public async Task<ActionResult> Post(PalabrasClave item)
         {
             _context.PalabrasClave.Add(item);
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro creado correctamente" });
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, PalabraClave item)
+        [HttpDelete("{proyecto}/{termino}")]
+        public async Task<IActionResult> Delete(int proyecto, string termino)
         {
-            if (id != item.id) return BadRequest();
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return Ok(new { mensaje = "Registro actualizado correctamente" });
-        }
-
-        [HttpPut("{campo}/{valor}")]
-        public async Task<IActionResult> PutPorCampo(string campo, string valor, PalabraClave item)
-        {
-            if (campo.ToLower() != "id" || !int.TryParse(valor, out int id)) return BadRequest();
-            item.id = id;
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return Ok(new { mensaje = "Registro actualizado correctamente" });
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var item = await _context.PalabrasClave.FindAsync(id);
-            if (item == null) return NotFound();
-            _context.PalabrasClave.Remove(item);
-            await _context.SaveChangesAsync();
-            return Ok(new { mensaje = "Registro eliminado correctamente" });
-        }
-
-        [HttpDelete("{campo}/{valor}")]
-        public async Task<IActionResult> DeletePorCampo(string campo, string valor)
-        {
-            if (campo.ToLower() != "id" || !int.TryParse(valor, out int id)) return BadRequest();
-            var item = await _context.PalabrasClave.FindAsync(id);
+            var item = await _context.PalabrasClave.FindAsync(proyecto, termino);
             if (item == null) return NotFound();
             _context.PalabrasClave.Remove(item);
             await _context.SaveChangesAsync();

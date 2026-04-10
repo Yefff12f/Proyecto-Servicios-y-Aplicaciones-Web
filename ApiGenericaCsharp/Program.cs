@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 
 // Configurar Entity Framework con SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(
+    options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );

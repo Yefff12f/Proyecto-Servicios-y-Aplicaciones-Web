@@ -3,6 +3,7 @@ using System;
 using ApiProyecto.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ApiGenericaCsharp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260409014011_V1")]
+    partial class V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,29 +90,6 @@ namespace ApiGenericaCsharp.Migrations
                     b.HasKey("id");
 
                     b.ToTable("objetivos_desarrollo_sostenible");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Curricular.AaRc", b =>
-                {
-                    b.Property<int>("actv_academicas_idcurso")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("registro_calificado_codigo")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.Property<string>("componente")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("semestre")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("actv_academicas_idcurso", "registro_calificado_codigo");
-
-                    b.ToTable("aa_rc");
                 });
 
             modelBuilder.Entity("ApiProyecto.Models.Curricular.Acreditacion", b =>
@@ -246,13 +226,17 @@ namespace ApiGenericaCsharp.Migrations
 
             modelBuilder.Entity("ApiProyecto.Models.Curricular.Alianza", b =>
                 {
-                    b.Property<int>("aliado")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<int>("departamento")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("aliado")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("departamento")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("docente")
                         .HasColumnType("integer");
@@ -260,27 +244,12 @@ namespace ApiGenericaCsharp.Migrations
                     b.Property<DateTime?>("fecha_fin")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime?>("fecha_inicio")
+                    b.Property<DateTime?>("fecha_ini")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("aliado", "departamento");
+                    b.HasKey("id");
 
                     b.ToTable("alianza");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Curricular.AnPrograma", b =>
-                {
-                    b.Property<int>("aspecto_normativo")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("programa")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("aspecto_normativo", "programa");
-
-                    b.ToTable("an_programa");
                 });
 
             modelBuilder.Entity("ApiProyecto.Models.Curricular.AspectoNormativo", b =>
@@ -372,21 +341,6 @@ namespace ApiGenericaCsharp.Migrations
                     b.HasKey("id");
 
                     b.ToTable("enfoque");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Curricular.EnfoqueRc", b =>
-                {
-                    b.Property<int>("enfoque")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("registro_calificado")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("enfoque", "registro_calificado");
-
-                    b.ToTable("enfoque_rc");
                 });
 
             modelBuilder.Entity("ApiProyecto.Models.Curricular.Facultad", b =>
@@ -544,51 +498,6 @@ namespace ApiGenericaCsharp.Migrations
                     b.ToTable("programa");
                 });
 
-            modelBuilder.Entity("ApiProyecto.Models.Curricular.ProgramaAc", b =>
-                {
-                    b.Property<int>("programa")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("area_conocimiento")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("programa", "area_conocimiento");
-
-                    b.ToTable("programa_ac");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Curricular.ProgramaCi", b =>
-                {
-                    b.Property<int>("programa")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("car_innovacion")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("programa", "car_innovacion");
-
-                    b.ToTable("programa_ci");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Curricular.ProgramaPe", b =>
-                {
-                    b.Property<int>("programa")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("practica_estrategia")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("programa", "practica_estrategia");
-
-                    b.ToTable("programa_pe");
-                });
-
             modelBuilder.Entity("ApiProyecto.Models.Curricular.RegistroCalificado", b =>
                 {
                     b.Property<int>("id")
@@ -664,418 +573,6 @@ namespace ApiGenericaCsharp.Migrations
                     b.ToTable("universidad");
                 });
 
-            modelBuilder.Entity("ApiProyecto.Models.Investigacion.OdsLinea", b =>
-                {
-                    b.Property<int>("linea_investigacion")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("ods")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("linea_investigacion", "ods");
-
-                    b.ToTable("ods_linea");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.ApoyoProfesoral", b =>
-                {
-                    b.Property<int>("estudios")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("estudios"));
-
-                    b.Property<bool?>("con_apoyo")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("institucion")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("tipo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("estudios");
-
-                    b.ToTable("apoyo_profesoral");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.Beca", b =>
-                {
-                    b.Property<int>("estudios")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("estudios"));
-
-                    b.Property<DateTime?>("fecha_fin")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("fecha_inicio")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("institucion")
-                        .HasMaxLength(80)
-                        .HasColumnType("character varying(80)");
-
-                    b.Property<string>("pais")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("tipo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("estudios");
-
-                    b.ToTable("beca");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.Docente", b =>
-                {
-                    b.Property<int>("cedula")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("cedula"));
-
-                    b.Property<string>("apellidos")
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
-
-                    b.Property<string>("cargo")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
-
-                    b.Property<string>("cat_minciencia")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("conv_minciencia")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("correo")
-                        .HasMaxLength(70)
-                        .HasColumnType("character varying(70)");
-
-                    b.Property<string>("escalafon")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<DateTime?>("fecha_actualizacion")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("fecha_nacimiento")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("genero")
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
-
-                    b.Property<int?>("linea_investigacion_principal")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("nacionalidad")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("nombres")
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
-
-                    b.Property<string>("perfil")
-                        .HasColumnType("text");
-
-                    b.Property<string>("telefono")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("url_cvlac")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.HasKey("cedula");
-
-                    b.ToTable("docente");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.EstudioAc", b =>
-                {
-                    b.Property<int>("estudio")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("area_conocimiento")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("estudio", "area_conocimiento");
-
-                    b.ToTable("estudio_ac");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.EstudiosRealizados", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<string>("ciudad")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<int?>("docente")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("fecha")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool?>("ins_acreditada")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("metodologia")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("pais")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("perfil_egresado")
-                        .HasColumnType("text");
-
-                    b.Property<string>("tipo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("titulo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("universidad")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("estudios_realizados");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.EvaluacionDocente", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<float?>("calificacion")
-                        .HasColumnType("real");
-
-                    b.Property<int?>("docente")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("semestre")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("evaluacion_docente");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.Experiecia", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<int?>("docente")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("fecha_fin")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("fecha_inicio")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("institucion")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("nombre")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("nombre_cargo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("tipo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("experiecia");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.InteresesFuturos", b =>
-                {
-                    b.Property<int>("docente")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<string>("termino_clave")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("docente", "termino_clave");
-
-                    b.ToTable("intereses_futuros");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.Reconocimiento", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<string>("ambito")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<int?>("docente")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("fecha")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("institucion")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("nombre")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("tipo")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("reconocimiento");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.Red", b =>
-                {
-                    b.Property<int>("idr")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("idr"));
-
-                    b.Property<string>("nombre")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("pas")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.Property<string>("uri")
-                        .HasMaxLength(45)
-                        .HasColumnType("character varying(45)");
-
-                    b.HasKey("idr");
-
-                    b.ToTable("red");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Profesional.RedDocente", b =>
-                {
-                    b.Property<int>("red")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("docente")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.Property<string>("act_destacadas")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("fecha_fin")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("fecha_inicio")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("red", "docente");
-
-                    b.ToTable("red_docente");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Proyecto.OdsProyecto", b =>
-                {
-                    b.Property<int>("proyecto")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("ods")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("proyecto", "ods");
-
-                    b.ToTable("ods_proyecto");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Proyecto.PalabrasClave", b =>
-                {
-                    b.Property<int>("proyecto")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<string>("termino_clave")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("proyecto", "termino_clave");
-
-                    b.ToTable("palabras_clave");
-                });
-
-            modelBuilder.Entity("ApiProyecto.Models.Proyecto.ProyectoLinea", b =>
-                {
-                    b.Property<int>("proyecto")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(0);
-
-                    b.Property<int>("linea_investigacion")
-                        .HasColumnType("integer")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("proyecto", "linea_investigacion");
-
-                    b.ToTable("proyecto_linea");
-                });
-
             modelBuilder.Entity("ApiProyecto.Models.conocimiento.AaProyecto", b =>
                 {
                     b.Property<int>("proyecto")
@@ -1146,21 +643,57 @@ namespace ApiGenericaCsharp.Migrations
 
             modelBuilder.Entity("ApiProyecto.Models.conocimiento.DocenteProducto", b =>
                 {
-                    b.Property<int>("docente")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("producto")
-                        .HasColumnType("integer");
-
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.HasKey("docente", "producto");
+                    b.Property<int?>("docente")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("producto")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
 
                     b.ToTable("docente_producto");
+                });
+
+            modelBuilder.Entity("ApiProyecto.Models.conocimiento.Ods", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ods");
+                });
+
+            modelBuilder.Entity("ApiProyecto.Models.conocimiento.PalabraClave", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("palabra")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("palabras_clave");
                 });
 
             modelBuilder.Entity("ApiProyecto.Models.conocimiento.Producto", b =>
@@ -1207,6 +740,25 @@ namespace ApiGenericaCsharp.Migrations
                     b.HasKey("id");
 
                     b.ToTable("proyecto");
+                });
+
+            modelBuilder.Entity("ApiProyecto.Models.conocimiento.ProyectoLinea", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("linea")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("proyecto")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("proyecto_linea");
                 });
 
             modelBuilder.Entity("ApiProyecto.Models.conocimiento.TerminoClave", b =>

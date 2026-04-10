@@ -5,46 +5,45 @@ using ApiProyecto.Models.Curricular;
 
 namespace ApiProyecto.Controllers.Curricular
 {
-    [Route("api/alianza")]
+    [Route("api/aa_rc")]
     [ApiController]
-    public class AlianzaController : ControllerBase
+    public class AaRcController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public AlianzaController(AppDbContext context) { _context = context; }
+        public AaRcController(AppDbContext context) { _context = context; }
 
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            var lista = await _context.Alianzas.ToListAsync();
+            var lista = await _context.AaRcs.ToListAsync();
             return Ok(new { datos = lista });
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Alianza item)
+        public async Task<ActionResult> Post(AaRc item)
         {
-            _context.Alianzas.Add(item);
+            _context.AaRcs.Add(item);
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro creado correctamente" });
         }
 
-        [HttpPut("{aliado}/{departamento}")]
-        public async Task<IActionResult> Put(int aliado, int departamento, Alianza item)
+        [HttpPut("{actv}/{rc}")]
+        public async Task<IActionResult> Put(int actv, int rc, AaRc item)
         {
-            var existente = await _context.Alianzas.FindAsync(aliado, departamento);
+            var existente = await _context.AaRcs.FindAsync(actv, rc);
             if (existente == null) return NotFound();
-            existente.fecha_inicio = item.fecha_inicio;
-            existente.fecha_fin = item.fecha_fin;
-            existente.docente = item.docente;
+            existente.componente = item.componente;
+            existente.semestre = item.semestre;
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro actualizado correctamente" });
         }
 
-        [HttpDelete("{aliado}/{departamento}")]
-        public async Task<IActionResult> Delete(int aliado, int departamento)
+        [HttpDelete("{actv}/{rc}")]
+        public async Task<IActionResult> Delete(int actv, int rc)
         {
-            var item = await _context.Alianzas.FindAsync(aliado, departamento);
+            var item = await _context.AaRcs.FindAsync(actv, rc);
             if (item == null) return NotFound();
-            _context.Alianzas.Remove(item);
+            _context.AaRcs.Remove(item);
             await _context.SaveChangesAsync();
             return Ok(new { mensaje = "Registro eliminado correctamente" });
         }

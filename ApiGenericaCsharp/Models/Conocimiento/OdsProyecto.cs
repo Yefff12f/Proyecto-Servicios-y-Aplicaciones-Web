@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiProyecto.Models.Proyecto
 {
-    [Table("proyecto_linea")]
-    public class ProyectoLinea
+    [Table("ods_proyecto")]
+    public class OdsProyecto
     {
         [Key, Column(Order = 0)]
         public int proyecto { get; set; }
 
         [Key, Column(Order = 1)]
-        public int linea_investigacion { get; set; }
+        public int ods { get; set; }
     }
 }
