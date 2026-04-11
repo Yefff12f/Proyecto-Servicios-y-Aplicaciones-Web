@@ -25,5 +25,7 @@ namespace ApiProyecto.Models.Curricular
         public string? pais { get; set; }
 
         public DateTime? fecha { get; set; }
+
+        public int? programa { get; set; }
     }
 }
