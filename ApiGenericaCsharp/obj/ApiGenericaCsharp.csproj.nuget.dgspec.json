@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj": {}
+    "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-Y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj": {
+    "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-Y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj",
+        "projectUniqueName": "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-Y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj",
         "projectName": "ApiGenericaCsharp",
-        "projectPath": "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj",
+        "projectPath": "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-Y-Aplicaciones-Web\\ApiGenericaCsharp\\ApiGenericaCsharp.csproj",
         "packagesPath": "C:\\Users\\ybermudez20\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-y-Aplicaciones-Web\\ApiGenericaCsharp\\obj\\",
+        "outputPath": "C:\\Users\\ybermudez20\\Desktop\\ApiBack\\Proyecto-Servicios-Y-Aplicaciones-Web\\ApiGenericaCsharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ybermudez20\\AppData\\Roaming\\NuGet\\NuGet.Config"
