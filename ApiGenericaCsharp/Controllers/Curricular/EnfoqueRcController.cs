@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/enfoque_rc")]
     [ApiController]
-    public class EnfoqueRcController : ControllerBase
+    public class EnfoqueRcController : BaseController
     {
         private readonly AppDbContext _context;
         public EnfoqueRcController(AppDbContext context) { _context = context; }

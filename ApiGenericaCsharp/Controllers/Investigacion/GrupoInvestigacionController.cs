@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers
 {
     [Route("api/grupo_investigacion")]
     [ApiController]
-    public class GrupoInvestigacionController : ControllerBase
+    public class GrupoInvestigacionController : BaseController
     {
         private readonly AppDbContext _context;
 

@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.conocimiento
 {
     [Route("api/termino_clave")]
     [ApiController]
-    public class TerminoClaveController : ControllerBase
+    public class TerminoClaveController : BaseController
     {
         private readonly AppDbContext _context;
         public TerminoClaveController(AppDbContext context) { _context = context; }

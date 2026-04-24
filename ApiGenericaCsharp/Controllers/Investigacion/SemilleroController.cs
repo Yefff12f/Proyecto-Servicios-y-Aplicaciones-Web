@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers
 {
     [Route("api/semillero")]
     [ApiController]
-    public class SemilleroController : ControllerBase
+    public class SemilleroController : BaseController
     {
         private readonly AppDbContext _context;
         public SemilleroController(AppDbContext context) { _context = context; }

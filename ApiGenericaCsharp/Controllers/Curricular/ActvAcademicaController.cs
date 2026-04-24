@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/actv_academica")]
     [ApiController]
-    public class ActvAcademicaController : ControllerBase
+    public class ActvAcademicaController : BaseController
     {
         private readonly AppDbContext _context;
         public ActvAcademicaController(AppDbContext context) { _context = context; }

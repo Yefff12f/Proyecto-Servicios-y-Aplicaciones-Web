@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Proyecto
 {
     [Route("api/ods_proyecto")]
     [ApiController]
-    public class OdsProyectoController : ControllerBase
+    public class OdsProyectoController : BaseController
     {
         private readonly AppDbContext _context;
         public OdsProyectoController(AppDbContext context) { _context = context; }

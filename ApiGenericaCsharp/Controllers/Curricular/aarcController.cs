@@ -2,15 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/aa_rc")]
     [ApiController]
-    public class AaRcController : ControllerBase
+    public class AaRcController : BaseController
     {
         private readonly AppDbContext _context;
         public AaRcController(AppDbContext context) { _context = context; }
+        
 
         [HttpGet]
         public async Task<ActionResult> Get()
@@ -20,6 +21,7 @@ namespace ApiProyecto.Controllers.Curricular
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin, user")]
         public async Task<ActionResult> Post(AaRc item)
         {
             _context.AaRcs.Add(item);
@@ -28,6 +30,7 @@ namespace ApiProyecto.Controllers.Curricular
         }
 
         [HttpPut("{actv}/{rc}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Put(int actv, int rc, AaRc item)
         {
             var existente = await _context.AaRcs.FindAsync(actv, rc);
@@ -39,6 +42,7 @@ namespace ApiProyecto.Controllers.Curricular
         }
 
         [HttpDelete("{actv}/{rc}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int actv, int rc)
         {
             var item = await _context.AaRcs.FindAsync(actv, rc);

@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Proyecto
 {
     [Route("api/palabras_clave")]
     [ApiController]
-    public class PalabrasClaveController : ControllerBase
+    public class PalabrasClaveController : BaseController
     {
         private readonly AppDbContext _context;
         public PalabrasClaveController(AppDbContext context) { _context = context; }

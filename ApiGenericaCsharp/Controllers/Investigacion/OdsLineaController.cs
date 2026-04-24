@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Investigacion
 {
     [Route("api/ods_linea")]
     [ApiController]
-    public class OdsLineaController : ControllerBase
+    public class OdsLineaController : BaseController
     {
         private readonly AppDbContext _context;
         public OdsLineaController(AppDbContext context) { _context = context; }

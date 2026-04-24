@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Profesional
 {
     [Route("api/intereses_futuros")]
     [ApiController]
-    public class InteresesFuturosController : ControllerBase
+    public class InteresesFuturosController : BaseController
     {
         private readonly AppDbContext _context;
         public InteresesFuturosController(AppDbContext context) { _context = context; }

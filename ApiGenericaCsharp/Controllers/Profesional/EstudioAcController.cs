@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Profesional
 {
     [Route("api/estudio_ac")]
     [ApiController]
-    public class EstudioAcController : ControllerBase
+    public class EstudioAcController : BaseController
     {
         private readonly AppDbContext _context;
         public EstudioAcController(AppDbContext context) { _context = context; }

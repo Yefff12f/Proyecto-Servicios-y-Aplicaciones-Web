@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Caracterizacion
 {
     [Route("api/objetivos_desarrollo_sostenible")]
     [ApiController]
-    public class ObjetivoDesarrolloSostenibleController : ControllerBase
+    public class ObjetivoDesarrolloSostenibleController : BaseController
     {
         private readonly AppDbContext _context;
         public ObjetivoDesarrolloSostenibleController(AppDbContext context) { _context = context; }

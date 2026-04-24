@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/aspecto_normativo")]
     [ApiController]
-    public class AspectoNormativoController : ControllerBase
+    public class AspectoNormativoController : BaseController
     {
         private readonly AppDbContext _context;
         public AspectoNormativoController(AppDbContext context) { _context = context; }

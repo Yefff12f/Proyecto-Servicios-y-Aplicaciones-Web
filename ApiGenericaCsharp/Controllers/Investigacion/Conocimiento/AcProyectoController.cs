@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Conocimiento
 {
     [Route("api/ac_proyecto")]
     [ApiController]
-    public class AcProyectoController : ControllerBase
+    public class AcProyectoController : BaseController
     {
         private readonly AppDbContext _context;
         public AcProyectoController(AppDbContext context) { _context = context; }

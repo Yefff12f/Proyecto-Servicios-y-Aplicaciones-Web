@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.conocimiento
 {
     [Route("api/desarrolla")]
     [ApiController]
-    public class DesarrollaController : ControllerBase
+    public class DesarrollaController : BaseController
     {
         private readonly AppDbContext _context;
         public DesarrollaController(AppDbContext context) { _context = context; }

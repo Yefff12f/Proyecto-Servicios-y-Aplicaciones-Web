@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers
 {
     [Route("api/participa_grupo")]
     [ApiController]
-    public class ParticipaGrupoController : ControllerBase
+    public class ParticipaGrupoController : BaseController
     {
         private readonly AppDbContext _context;
         public ParticipaGrupoController(AppDbContext context) { _context = context; }

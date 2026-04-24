@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ApiProyecto.Models;
 using ApiProyecto.Models.investigacion;
 using ApiProyecto.Models.Caracterizacion;
 using ApiProyecto.Models.conocimiento;
@@ -15,7 +16,11 @@ namespace ApiProyecto.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-         //INVESTIGACION
+        
+        //AUTENTICACION
+        public DbSet<Usuarios> Usuarios { get; set; }
+        
+        //INVESTIGACION
         public DbSet<LineaInvestigacion> LineasInvestigacion { get; set; }
         public DbSet<GrupoInvestigacion> GruposInvestigacion { get; set; }
         public DbSet<Semillero> Semilleros { get; set; }

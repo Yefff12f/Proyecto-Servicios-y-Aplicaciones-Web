@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers
 {
     [Route("api/participa_semillero")]
     [ApiController]
-    public class ParticipaSemilleroController : ControllerBase
+    public class ParticipaSemilleroController : BaseController
     {
         private readonly AppDbContext _context;
         public ParticipaSemilleroController(AppDbContext context) { _context = context; }

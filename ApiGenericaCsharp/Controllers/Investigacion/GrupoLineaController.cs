@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers
 {
     [Route("api/grupo_linea")]
     [ApiController]
-    public class GrupoLineaController : ControllerBase
+    public class GrupoLineaController : BaseController
     {
         private readonly AppDbContext _context;
         public GrupoLineaController(AppDbContext context) { _context = context; }

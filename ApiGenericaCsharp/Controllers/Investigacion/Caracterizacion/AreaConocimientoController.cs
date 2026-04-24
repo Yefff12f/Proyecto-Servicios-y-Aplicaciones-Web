@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Caracterizacion
 {
     [Route("api/area_conocimiento")]
     [ApiController]
-    public class AreaConocimientoController : ControllerBase
+    public class AreaConocimientoController : BaseController
     {
         private readonly AppDbContext _context;
         public AreaConocimientoController(AppDbContext context) { _context = context; }

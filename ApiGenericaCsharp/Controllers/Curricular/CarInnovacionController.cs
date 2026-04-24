@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/car_innovacion")]
     [ApiController]
-    public class CarInnovacionController : ControllerBase
+    public class CarInnovacionController : BaseController
     {
         private readonly AppDbContext _context;
         public CarInnovacionController(AppDbContext context) { _context = context; }

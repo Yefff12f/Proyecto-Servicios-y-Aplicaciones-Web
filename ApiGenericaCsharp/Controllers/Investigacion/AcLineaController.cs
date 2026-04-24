@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers
 {
     [Route("api/ac_linea")]
     [ApiController]
-    public class AcLineaController : ControllerBase
+    public class AcLineaController : BaseController
     {
         private readonly AppDbContext _context;
         public AcLineaController(AppDbContext context) { _context = context; }

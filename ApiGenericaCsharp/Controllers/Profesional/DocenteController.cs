@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Profesional
 {
     [Route("api/docente")]
     [ApiController]
-    public class DocenteController : ControllerBase
+    public class DocenteController : BaseController
     {
         private readonly AppDbContext _context;
         public DocenteController(AppDbContext context) { _context = context; }

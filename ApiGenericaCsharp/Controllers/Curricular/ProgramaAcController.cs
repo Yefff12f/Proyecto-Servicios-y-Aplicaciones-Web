@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/programa_ac")]
     [ApiController]
-    public class ProgramaAcController : ControllerBase
+    public class ProgramaAcController : BaseController
     {
         private readonly AppDbContext _context;
         public ProgramaAcController(AppDbContext context) { _context = context; }

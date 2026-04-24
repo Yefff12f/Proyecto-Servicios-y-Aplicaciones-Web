@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/premio")]
     [ApiController]
-    public class PremioController : ControllerBase
+    public class PremioController : BaseController
     {
         private readonly AppDbContext _context;
         public PremioController(AppDbContext context) { _context = context; }

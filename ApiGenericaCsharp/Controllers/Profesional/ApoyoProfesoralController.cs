@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Profesional
 {
     [Route("api/apoyo_profesoral")]
     [ApiController]
-    public class ApoyoProfesoralController : ControllerBase
+    public class ApoyoProfesoralController : BaseController
     {
         private readonly AppDbContext _context;
         public ApoyoProfesoralController(AppDbContext context) { _context = context; }

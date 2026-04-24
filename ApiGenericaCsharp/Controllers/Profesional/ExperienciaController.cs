@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Profesional
 {
     [Route("api/experiecia")]
     [ApiController]
-    public class ExpereciaController : ControllerBase
+    public class ExpereciaController : BaseController
     {
         private readonly AppDbContext _context;
         public ExpereciaController(AppDbContext context) { _context = context; }

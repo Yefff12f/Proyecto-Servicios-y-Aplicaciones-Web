@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/aliado")]
     [ApiController]
-    public class AliadoController : ControllerBase
+    public class AliadoController : BaseController
     {
         private readonly AppDbContext _context;
         public AliadoController(AppDbContext context) { _context = context; }

@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiProyecto.Data;
 using ApiProyecto.Models.Curricular;
-
+using Microsoft.AspNetCore.Authorization;
 namespace ApiProyecto.Controllers.Curricular
 {
     [Route("api/docente_departamento")]
     [ApiController]
-    public class DocenteDepartamentoController : ControllerBase
+    public class DocenteDepartamentoController : BaseController
     {
         private readonly AppDbContext _context;
         public DocenteDepartamentoController(AppDbContext context) { _context = context; }

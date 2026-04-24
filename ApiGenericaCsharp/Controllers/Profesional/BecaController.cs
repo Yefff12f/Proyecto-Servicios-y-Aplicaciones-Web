@@ -7,7 +7,7 @@ namespace ApiProyecto.Controllers.Profesional
 {
     [Route("api/beca")]
     [ApiController]
-    public class BecaController : ControllerBase
+    public class BecaController : BaseController
     {
         private readonly AppDbContext _context;
         public BecaController(AppDbContext context) { _context = context; }
