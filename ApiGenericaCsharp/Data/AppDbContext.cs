@@ -127,9 +127,6 @@ namespace ApiProyecto.Data
     modelBuilder.Entity<AaProyecto>()
         .HasKey(x => new { x.proyecto, x.area_aplicacion });
 
-    modelBuilder.Entity<DocenteProducto>()
-        .HasKey(x => new { x.docente, x.producto });
-
     modelBuilder.Entity<PalabrasClave>()
         .HasKey(x => new { x.proyecto, x.termino_clave });
 

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ApiGenericaCsharp.Migrations
 {
     /// <inheritdoc />
-    public partial class V1 : Migration
+    public partial class InitialPostgres : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,20 @@ namespace ApiGenericaCsharp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_aa_proyecto", x => new { x.proyecto, x.area_aplicacion });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "aa_rc",
+                columns: table => new
+                {
+                    actv_academicas_idcurso = table.Column<int>(type: "integer", nullable: false),
+                    registro_calificado_codigo = table.Column<int>(type: "integer", nullable: false),
+                    componente = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    semestre = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_aa_rc", x => new { x.actv_academicas_idcurso, x.registro_calificado_codigo });
                 });
 
             migrationBuilder.CreateTable(
@@ -125,17 +139,42 @@ namespace ApiGenericaCsharp.Migrations
                 name: "alianza",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    departamento = table.Column<int>(type: "integer", nullable: true),
-                    aliado = table.Column<int>(type: "integer", nullable: true),
-                    docente = table.Column<int>(type: "integer", nullable: true),
-                    fecha_ini = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    fecha_fin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    aliado = table.Column<int>(type: "integer", nullable: false),
+                    departamento = table.Column<int>(type: "integer", nullable: false),
+                    fecha_inicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    fecha_fin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    docente = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_alianza", x => x.id);
+                    table.PrimaryKey("PK_alianza", x => new { x.aliado, x.departamento });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "an_programa",
+                columns: table => new
+                {
+                    aspecto_normativo = table.Column<int>(type: "integer", nullable: false),
+                    programa = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_an_programa", x => new { x.aspecto_normativo, x.programa });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "apoyo_profesoral",
+                columns: table => new
+                {
+                    estudios = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    con_apoyo = table.Column<bool>(type: "boolean", nullable: true),
+                    institucion = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_apoyo_profesoral", x => x.estudios);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,6 +233,23 @@ namespace ApiGenericaCsharp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "beca",
+                columns: table => new
+                {
+                    estudios = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    institucion = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: true),
+                    fecha_inicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    fecha_fin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    pais = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_beca", x => x.estudios);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "car_innovacion",
                 columns: table => new
                 {
@@ -219,6 +275,33 @@ namespace ApiGenericaCsharp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_desarrolla", x => new { x.docente, x.proyecto });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "docente",
+                columns: table => new
+                {
+                    cedula = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nombres = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: true),
+                    apellidos = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: true),
+                    genero = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
+                    cargo = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    fecha_nacimiento = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    correo = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: true),
+                    telefono = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    url_cvlac = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    fecha_actualizacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    escalafon = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    perfil = table.Column<string>(type: "text", nullable: true),
+                    cat_minciencia = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    conv_minciencia = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    nacionalidad = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    linea_investigacion_principal = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_docente", x => x.cedula);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,6 +346,86 @@ namespace ApiGenericaCsharp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_enfoque", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "enfoque_rc",
+                columns: table => new
+                {
+                    enfoque = table.Column<int>(type: "integer", nullable: false),
+                    registro_calificado = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_enfoque_rc", x => new { x.enfoque, x.registro_calificado });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "estudio_ac",
+                columns: table => new
+                {
+                    estudio = table.Column<int>(type: "integer", nullable: false),
+                    area_conocimiento = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_estudio_ac", x => new { x.estudio, x.area_conocimiento });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "estudios_realizados",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    titulo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    universidad = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    ciudad = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    docente = table.Column<int>(type: "integer", nullable: true),
+                    ins_acreditada = table.Column<bool>(type: "boolean", nullable: true),
+                    metodologia = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    perfil_egresado = table.Column<string>(type: "text", nullable: true),
+                    pais = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_estudios_realizados", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "evaluacion_docente",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    calificacion = table.Column<float>(type: "real", nullable: true),
+                    semestre = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    docente = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_evaluacion_docente", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "experiecia",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nombre_cargo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    institucion = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    nombre = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    fecha_inicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    fecha_fin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    docente = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_experiecia", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -313,6 +476,18 @@ namespace ApiGenericaCsharp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "intereses_futuros",
+                columns: table => new
+                {
+                    docente = table.Column<int>(type: "integer", nullable: false),
+                    termino_clave = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_intereses_futuros", x => new { x.docente, x.termino_clave });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "linea_investigacion",
                 columns: table => new
                 {
@@ -341,29 +516,39 @@ namespace ApiGenericaCsharp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ods",
+                name: "ods_linea",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombre = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false)
+                    linea_investigacion = table.Column<int>(type: "integer", nullable: false),
+                    ods = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ods", x => x.id);
+                    table.PrimaryKey("PK_ods_linea", x => new { x.linea_investigacion, x.ods });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ods_proyecto",
+                columns: table => new
+                {
+                    proyecto = table.Column<int>(type: "integer", nullable: false),
+                    ods = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ods_proyecto", x => new { x.proyecto, x.ods });
                 });
 
             migrationBuilder.CreateTable(
                 name: "palabras_clave",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    palabra = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false)
+                    proyecto = table.Column<int>(type: "integer", nullable: false),
+                    termino_clave = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_palabras_clave", x => x.id);
+                    table.PrimaryKey("PK_palabras_clave", x => new { x.proyecto, x.termino_clave });
                 });
 
             migrationBuilder.CreateTable(
@@ -439,7 +624,8 @@ namespace ApiGenericaCsharp.Migrations
                     entidad_otorgante = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
                     valor = table.Column<double>(type: "double precision", nullable: true),
                     pais = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
-                    fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    programa = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -483,6 +669,42 @@ namespace ApiGenericaCsharp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "programa_ac",
+                columns: table => new
+                {
+                    programa = table.Column<int>(type: "integer", nullable: false),
+                    area_conocimiento = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_programa_ac", x => new { x.programa, x.area_conocimiento });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "programa_ci",
+                columns: table => new
+                {
+                    programa = table.Column<int>(type: "integer", nullable: false),
+                    car_innovacion = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_programa_ci", x => new { x.programa, x.car_innovacion });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "programa_pe",
+                columns: table => new
+                {
+                    programa = table.Column<int>(type: "integer", nullable: false),
+                    practica_estrategia = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_programa_pe", x => new { x.programa, x.practica_estrategia });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "proyecto",
                 columns: table => new
                 {
@@ -501,14 +723,60 @@ namespace ApiGenericaCsharp.Migrations
                 name: "proyecto_linea",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    proyecto = table.Column<int>(type: "integer", nullable: true),
-                    linea = table.Column<int>(type: "integer", nullable: true)
+                    proyecto = table.Column<int>(type: "integer", nullable: false),
+                    linea_investigacion = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_proyecto_linea", x => x.id);
+                    table.PrimaryKey("PK_proyecto_linea", x => new { x.proyecto, x.linea_investigacion });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "reconocimiento",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    institucion = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    nombre = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    ambito = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    docente = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reconocimiento", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "red",
+                columns: table => new
+                {
+                    idr = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nombre = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    uri = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true),
+                    pas = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_red", x => x.idr);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "red_docente",
+                columns: table => new
+                {
+                    red = table.Column<int>(type: "integer", nullable: false),
+                    docente = table.Column<int>(type: "integer", nullable: false),
+                    fecha_inicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    fecha_fin = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    act_destacadas = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_red_docente", x => new { x.red, x.docente });
                 });
 
             migrationBuilder.CreateTable(
@@ -602,6 +870,21 @@ namespace ApiGenericaCsharp.Migrations
                 {
                     table.PrimaryKey("PK_universidad", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Usuario = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Rol = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -609,6 +892,9 @@ namespace ApiGenericaCsharp.Migrations
         {
             migrationBuilder.DropTable(
                 name: "aa_proyecto");
+
+            migrationBuilder.DropTable(
+                name: "aa_rc");
 
             migrationBuilder.DropTable(
                 name: "ac_linea");
@@ -632,6 +918,12 @@ namespace ApiGenericaCsharp.Migrations
                 name: "alianza");
 
             migrationBuilder.DropTable(
+                name: "an_programa");
+
+            migrationBuilder.DropTable(
+                name: "apoyo_profesoral");
+
+            migrationBuilder.DropTable(
                 name: "area_aplicacion");
 
             migrationBuilder.DropTable(
@@ -644,10 +936,16 @@ namespace ApiGenericaCsharp.Migrations
                 name: "aspecto_normativo");
 
             migrationBuilder.DropTable(
+                name: "beca");
+
+            migrationBuilder.DropTable(
                 name: "car_innovacion");
 
             migrationBuilder.DropTable(
                 name: "desarrolla");
+
+            migrationBuilder.DropTable(
+                name: "docente");
 
             migrationBuilder.DropTable(
                 name: "docente_departamento");
@@ -659,6 +957,21 @@ namespace ApiGenericaCsharp.Migrations
                 name: "enfoque");
 
             migrationBuilder.DropTable(
+                name: "enfoque_rc");
+
+            migrationBuilder.DropTable(
+                name: "estudio_ac");
+
+            migrationBuilder.DropTable(
+                name: "estudios_realizados");
+
+            migrationBuilder.DropTable(
+                name: "evaluacion_docente");
+
+            migrationBuilder.DropTable(
+                name: "experiecia");
+
+            migrationBuilder.DropTable(
                 name: "facultad");
 
             migrationBuilder.DropTable(
@@ -668,13 +981,19 @@ namespace ApiGenericaCsharp.Migrations
                 name: "grupo_linea");
 
             migrationBuilder.DropTable(
+                name: "intereses_futuros");
+
+            migrationBuilder.DropTable(
                 name: "linea_investigacion");
 
             migrationBuilder.DropTable(
                 name: "objetivos_desarrollo_sostenible");
 
             migrationBuilder.DropTable(
-                name: "ods");
+                name: "ods_linea");
+
+            migrationBuilder.DropTable(
+                name: "ods_proyecto");
 
             migrationBuilder.DropTable(
                 name: "palabras_clave");
@@ -701,10 +1020,28 @@ namespace ApiGenericaCsharp.Migrations
                 name: "programa");
 
             migrationBuilder.DropTable(
+                name: "programa_ac");
+
+            migrationBuilder.DropTable(
+                name: "programa_ci");
+
+            migrationBuilder.DropTable(
+                name: "programa_pe");
+
+            migrationBuilder.DropTable(
                 name: "proyecto");
 
             migrationBuilder.DropTable(
                 name: "proyecto_linea");
+
+            migrationBuilder.DropTable(
+                name: "reconocimiento");
+
+            migrationBuilder.DropTable(
+                name: "red");
+
+            migrationBuilder.DropTable(
+                name: "red_docente");
 
             migrationBuilder.DropTable(
                 name: "registro_calificado");
@@ -723,6 +1060,9 @@ namespace ApiGenericaCsharp.Migrations
 
             migrationBuilder.DropTable(
                 name: "universidad");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }

@@ -1174,19 +1174,19 @@ namespace ApiGenericaCsharp.Migrations
 
             modelBuilder.Entity("ApiProyecto.Models.conocimiento.DocenteProducto", b =>
                 {
-                    b.Property<int>("docente")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("producto")
-                        .HasColumnType("integer");
-
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.HasKey("docente", "producto");
+                    b.Property<int?>("docente")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("producto")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
 
                     b.ToTable("docente_producto");
                 });

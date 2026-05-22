@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# SQL Server Management Studio Version 22
-VisualStudioVersion = 18.5.11709.299 stable
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGenericaCsharp", "ApiGenericaCsharp\ApiGenericaCsharp.csproj", "{34FD8CBA-356D-B662-0059-F71ACDB39C20}"
 EndProject
