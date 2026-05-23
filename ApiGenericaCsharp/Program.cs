@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using ApiProyecto.Data;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5018";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 // Controllers
 builder.Services.AddControllers();
@@ -96,9 +100,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 app.UseCors("AllowFront");
 
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 // 🔐 ORDEN IMPORTANTE
 app.UseAuthentication();
