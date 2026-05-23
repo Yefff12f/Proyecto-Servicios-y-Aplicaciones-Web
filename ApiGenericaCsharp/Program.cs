@@ -73,7 +73,8 @@ builder.Services.AddCors(options =>
                 "http://localhost:5173",
                 "https://localhost:5173",
                 "http://localhost:5100",
-                "https://localhost:5100"
+                "https://localhost:5100",
+                "https://frontblazorapigenericacsharp-production.up.railway.app"
             )
             .AllowAnyMethod()
             .AllowAnyHeader()
