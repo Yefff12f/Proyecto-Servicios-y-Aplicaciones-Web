@@ -117,11 +117,6 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.UseCors("AllowFront");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-}
-
 // 🔐 ORDEN IMPORTANTE
 app.UseAuthentication();
 app.UseAuthorization();
