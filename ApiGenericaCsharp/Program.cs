@@ -13,6 +13,12 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 // Controllers
 builder.Services.AddControllers();
 
+builder.Services.AddHsts(options =>
+{
+    options.IncludeSubDomains = true;
+    options.MaxAge = TimeSpan.FromDays(365);
+});
+
 // DB
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
@@ -97,6 +103,11 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
 }
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
