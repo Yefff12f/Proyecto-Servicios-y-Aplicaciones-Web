@@ -1,37 +1,19 @@
-# Carpetas de compilación 
+# Carpetas de compilación
+bin/
+obj/
 
-bin/ 
+# Configuración de Visual Studio
+.vs/
+*.user
+*.suo
 
-obj/ 
+# Configuración de VS Code
+.vscode/
 
- 
+# Archivos de sistema
+.DS_Store
+Thumbs.db
 
-# Configuración de Visual Studio 
-
-.vs/ 
-
-*.user 
-
-*.suo 
-
- 
-
-# Configuración de VS Code 
-
-.vscode/ 
-
- 
-
-# Archivos de sistema 
-
-.DS_Store 
-
-Thumbs.db 
-
- 
-
-# Archivos de entorno 
-
-.env 
-
-appsettings.Development.json 
+# Archivos de entorno
+.env
+appsettings.Development.json
