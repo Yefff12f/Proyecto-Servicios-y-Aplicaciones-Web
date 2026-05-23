@@ -17,3 +17,6 @@ Thumbs.db
 # Archivos de entorno
 .env
 appsettings.Development.json
+
+# Caché del servicio de lenguaje C# Dev Kit
+*.lscache
