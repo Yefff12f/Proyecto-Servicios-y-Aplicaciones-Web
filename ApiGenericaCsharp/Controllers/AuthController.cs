@@ -23,6 +23,7 @@ namespace ApiProyecto.Controllers
         }
 
         // 🔐 LOGIN
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest req)
         {
@@ -48,6 +49,7 @@ namespace ApiProyecto.Controllers
         }
 
         // 🧾 REGISTER (automático: primer usuario admin)
+        [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register([FromBody] LoginRequest req)
         {
