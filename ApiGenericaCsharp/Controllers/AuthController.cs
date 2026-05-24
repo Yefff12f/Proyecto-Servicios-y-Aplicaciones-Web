@@ -131,5 +131,13 @@ namespace ApiProyecto.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-    }
-}
+
+        [AllowAnonymous]
+        [HttpPost("hash")]
+        public IActionResult GetHash([FromBody] LoginRequest req)
+       {
+         var hash = BCrypt.Net.BCrypt.HashPassword(req.Password);
+         return Ok(new { hash });
+        }
+      }
+  }
